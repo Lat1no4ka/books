@@ -7,7 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 @RestController
@@ -15,13 +19,16 @@ import java.util.Map;
 @ResponseBody
 public class BookController {
 
+
     @Autowired
     public BookDao dao;
 
     @RequestMapping(value = "/getBooks", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public ArrayList<String> getBooks() {
-        return dao.findAll();
+    public List<String> getBooks() {
+        List<String> stringList =  dao.findAll();
+        List<String> sortedList = stringList.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+        return sortedList;
     }
 
     @RequestMapping(value = "/addBook",

@@ -23,7 +23,7 @@ public class BookDao implements Dao {
 
     public ArrayList<String> findAll() {
         ArrayList<String> resTitle = new ArrayList<>();
-        List<Book> allTitle = (jdbcTemplate.query("select * from book ORDER by title DESC", ROW_MAPPER_TITLE));
+        List<Book> allTitle = (jdbcTemplate.query("select * from book", ROW_MAPPER_TITLE));
         for(int i=0;i<allTitle.size();i++){
             resTitle.add(allTitle.get(i).getTitle());
         }
