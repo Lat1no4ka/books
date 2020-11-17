@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 
@@ -29,9 +28,9 @@ public class BookController {
             method = RequestMethod.POST,
             headers = {"Content-type=application/json"})
     @ResponseBody
-    public String addBook(@RequestBody Book book) {
+    public Book addBook(@RequestBody Book book) {
         dao.save(book);
-        return "string";
+        return book;
     }
     @RequestMapping(value = "/getGroupBooks", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody

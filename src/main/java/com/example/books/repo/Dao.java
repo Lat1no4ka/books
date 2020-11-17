@@ -12,7 +12,10 @@ public interface Dao  {
 
 
     RowMapper<Book> ROW_MAPPER_TITLE = (ResultSet resultSet, int rowNum) -> {
-        return new Book( resultSet.getString("title"));
+        return new Book( resultSet.getInt("id"),resultSet.getString("title"));
+    };
+    RowMapper<Book> ROW_MAPPER_AUTHOR = (ResultSet resultSet, int rowNum) -> {
+        return new Book( resultSet.getString("author"));
     };
 
 

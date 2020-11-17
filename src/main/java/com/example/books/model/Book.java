@@ -24,10 +24,17 @@ public class Book {
         Author = author;
         Description = description;
     }
-
-    public Book(String title) {
+    public Book(int id,String title) {
+        this.id = id;
         Title = title;
     }
+    public Book(String author) {
+        Author = author;
+    }
+    public Book() {
+    }
+
+
 
 
     public int getId() {

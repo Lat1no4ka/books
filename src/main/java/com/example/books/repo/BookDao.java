@@ -29,13 +29,21 @@ public class BookDao implements Dao {
         }
         return resTitle;
     }
+    public ArrayList<String> findAuthor() {
+        ArrayList<String> resAuthor = new ArrayList<>();
+        List<Book> allAuthor = (jdbcTemplate.query("select * from book group by author", ROW_MAPPER_AUTHOR));
+        for(int i=0;i<allAuthor.size();i++){
+            resAuthor.add(allAuthor.get(i).getAuthor());
+        }
+        return resAuthor;
+    }
 
     public Map<String, ArrayList<String>> findGroupAll() {
-        List<String> author = findAll();
+        List<String> author = findAuthor();
         Map<String, ArrayList<String>> groupAuthor = new HashMap<String, ArrayList<String>>();
         for(int i = 0; i < author.size(); i++){
             String authorName = author.get(i);
-            List<Book> titleList =  jdbcTemplate.query("select title from book where author = '"+ authorName+"'" , ROW_MAPPER_TITLE);
+            List<Book> titleList =  jdbcTemplate.query("select id,title from book where author = ?",new Object[]{authorName} , ROW_MAPPER_TITLE);
             ArrayList<String> title = new ArrayList<>();
             for(int j=0; j < titleList.size();j++){
                 title.add(titleList.get(j).getTitle());
