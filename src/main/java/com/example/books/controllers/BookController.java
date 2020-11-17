@@ -33,9 +33,8 @@ public class BookController {
         dao.save(book);
         return "string";
     }
-    @RequestMapping(value = "/getBooks", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/getGroupBooks", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    @GetMapping("/getGroupBooks")
     public Map<String, ArrayList<String>> getGroupBooks()
     {
         return dao.findGroupAll();
